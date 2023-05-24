@@ -54,7 +54,7 @@ export default function BatteryInfo() {
         /> */}
         <View
           style={{
-            paddingHorizontal: 100,
+            paddingHorizontal: 100 ,
           }}
         >
           <ProgressBar

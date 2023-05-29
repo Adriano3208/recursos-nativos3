@@ -48,19 +48,22 @@ export default function BatteryInfo() {
     <View style={styles.container}>
       <Header title={"Bateria"} />
       <View>
-        <Text style={{ paddingHorizontal: 100, marginTop: 90 }}>{nivelBateria} %</Text>
+        <Text style={{ textAlign: 'center', marginTop: 90 }}>{nivelBateria} %</Text>
         {/* <View
           style={{ height: 20, width: nivelBateria, backgroundColor: nivelCor }}
         /> */}
         <View
           style={{
-            paddingHorizontal: 100,
+            alignContent: "center",
+            alignItems: "center",
+            marginBottom: 20,
+            marginTop: 20,
           }}
         >
           <ProgressBar
             style={{
-              marginVertical: 50,
               width: nivelBateria,
+              
             }}
             progress={nivelBateria}
             color={nivelCor}

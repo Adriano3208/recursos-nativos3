@@ -100,7 +100,7 @@ export default function Notify({ navigation }) {
     console.log(idToken);
 
     if (idToken == expoToken) {
-      navigation.navigate("HomeAula");
+      navigation.navigate("Home");
     }
   }
 

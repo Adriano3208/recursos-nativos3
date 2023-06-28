@@ -6,6 +6,7 @@ import DeviceInfo from "./DeviceInfo";
 import Home from "./Home";
 import MyScreenOrientation from "./MyScreenOrientation";
 import Notify from "./Notify";
+import ContactsInfo from "./ContactsInfo";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ export default function RootNavigation({navigation}) {
         <Stack.Screen name="DeviceInfo" component={DeviceInfo} />
         <Stack.Screen name="MyScreenOrientation" component={MyScreenOrientation} />
         <Stack.Screen name="Notify" component={Notify} />
+        <Stack.Screen name="ContactsInfo" component={ContactsInfo} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -22,6 +22,7 @@ export default function Home({navigation}) {
             <Button title="Ir para a tela de informações do bateria" onPress={() => navigation.navigate('BatteryInfo')}>Battery info</Button>
             <Button title="Ir para a tela de orientação de tela" onPress={() => navigation.navigate('MyScreenOrientation')}>Orientação de tela</Button>
             <Button title="Ir para a tela de notificações" onPress={() => navigation.navigate('Notify')}>Notificações</Button>
+            <Button title="Ir para a tela de contatos" onPress={() => navigation.navigate('ContactsInfo')}>Contatos</Button>
         </View>
     )
 }

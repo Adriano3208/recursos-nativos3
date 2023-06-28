@@ -21,28 +21,28 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function Items({ item }) {
+export default function Items({ item, notiMensagem }) {
     return (
-        <Pressable>
-            <View style={styles.content}>
-                <Text style={styles.title}>
-                    {item.name}
-                </Text>
-
-                { item?.emails?.length > 0
-                ? <Text style={styles.text}>
-                {item.emails[0].email}
-                </Text>
-                : <></>
-                }
-
-                { item?.phoneNumbers?.length > 0
-                ? <Text style={styles.text}>
-                {item.phoneNumbers[0].number}
-                </Text>
-                : <></>
-                }
-            </View>
-        </Pressable>
-    )
-}
+      <Pressable
+        onPress={() => {
+          notiMensagem()
+        }}
+      >
+        <View style={styles.content}>
+          <Text style={styles.title}>{item.name}</Text>
+  
+          {item?.emails?.length > 0 ? (
+            <Text style={styles.text}>{item.emails[0].email}</Text>
+          ) : (
+            <></>
+          )}
+  
+          {item?.phoneNumbers?.length > 0 ? (
+            <Text style={styles.text}>{item.phoneNumbers[0].number}</Text>
+          ) : (
+            <></>
+          )}
+        </View>
+      </Pressable>
+    );
+  }

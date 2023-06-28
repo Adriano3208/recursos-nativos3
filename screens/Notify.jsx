@@ -2,10 +2,9 @@ import { Button, StyleSheet, Text, View } from "react-native";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import * as Notifications from "expo-notifications";
-import { useState } from "react";
 import * as Device from "expo-device";
 import * as Battery from "expo-battery";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,8 +15,6 @@ const styles = StyleSheet.create({
 
 export default function Notify({ navigation }) {
   const [nivelBateria, setNivelBateria] = useState();
-  const [nivelCor, setNivelCor] = useState("green");
-  const [ultimaNotif, setUltimaNotif] = useState();
   const [expoToken, setExpoToken] = useState("");
 
   async function notificarExpo() {
@@ -37,11 +34,10 @@ export default function Notify({ navigation }) {
       content: {
         title: "Nivel de Bateria",
         subtitle: "subtitulo",
-        body: "seu nivel de bateria é:" + nivelBateria + "%",
+        body: "seu nivel de bateria é: " + nivelBateria + "%",
       },
       trigger: { seconds: 3 },
     });
-
     setExpoToken(token);
   }
 
@@ -50,60 +46,46 @@ export default function Notify({ navigation }) {
     setNivelBateria(nivel * 100);
   }
 
-  const UltimaNotificacao = Notifications.useLastNotificationResponse();
-  async function exibirAlerta() {
-    alert("");
-    console.log(UltimaNotificacao);
-  }
-
-  useEffect(
-    () => {
-      exibirAlerta();
-      bateria();
-    },
-    [UltimaNotificacao],
-    [nivelBateria]
-  );
+  useEffect(() => {
+    exibirAlerta();
+    bateria();
+  }, []);
 
   const ultimaNotificacao = Notifications.useLastNotificationResponse();
 
   async function exibirAlerta() {
-    const idToken = ultimaNotificacao.Notifications;
-
-    alert("Atenção! " + idToken);
-
-    console.log(idToken);
+    if (ultimaNotificacao) {
+      const idToken = ultimaNotificacao.notification.request.identifier;
+      alert("Atenção! " + idToken);
+      console.log(idToken);
+    }
   }
 
   useEffect(() => {
-    if (ultimaNotificacao) {
-      setUltimaNotif(ultimaNotificacao.Notifications);
-    }
-
     exibirAlerta();
   }, [ultimaNotificacao]);
 
   async function lerNotificacao() {
-    const ultimaNotificacao =
-      await Notifications.getLastNotificationResponseAsync();
-
-    alert(ultimaNotificacao.Notifications);
-
-    console.log(ultimaNotificacao);
-  }
-
-  async function mudarPagina() {
-    const idToken = ultimaNotif;
-
-    alert("Atenção! " + idToken);
-
-    console.log(idToken);
-
-    if (idToken == expoToken) {
-      navigation.navigate("Home");
+    const ultimaNotificacao = await Notifications.getLastNotificationResponseAsync();
+    if (ultimaNotificacao) {
+      const idToken = ultimaNotificacao.notification.request.identifier;
+      alert("Última notificação lida: " + idToken);
+      console.log(ultimaNotificacao);
     }
   }
 
+  async function mudarPagina() {
+    if (ultimaNotificacao) {
+      const idToken = ultimaNotificacao.notification.request.identifier;
+      alert("Atenção! " + idToken);
+      console.log(idToken);
+  
+      if (idToken === expoToken) {
+        navigation.navigate("HomeAula"); // Replace "Home" with "HomeAula"
+      }
+    }
+  }
+  
   useEffect(() => {
     mudarPagina();
   }, [ultimaNotificacao]);
@@ -112,47 +94,41 @@ export default function Notify({ navigation }) {
     <View style={styles.container}>
       <Header title={"Notificações"} />
       <View>
-        <Text>Expo Token: {expoToken} </Text>
+        <Text>Expo Token: {expoToken}</Text>
         <Button
-          title="enviar notificação"
+          title="Enviar notificação"
           onPress={async () => {
             notificarExpo();
           }}
         />
-
         <Button
-          title="bateria noti"
+          title="Notificar nível de bateria"
           onPress={async () => {
             notificarBateria();
           }}
         />
         <Button
-          title="seu aparelho"
+          title="Mostrar aparelho"
           onPress={async () => {
             const token = await Notifications.scheduleNotificationAsync({
               content: {
                 title: "Seu Aparelho",
                 subtitle: "subtitulo",
-                body: "seu aparelho é:" + Device.modelName,
+                body: "seu aparelho é: " + Device.modelName,
               },
               trigger: { seconds: 3 },
             });
             setExpoToken(token);
           }}
         />
-
-<Button
-
-title="Enviar ultima notificação lida"
-
-onPress={async () => lerNotificacao()}/>
-
-<Button
-
- title="notificar e ir para outra página"
-
- onPress={async () => mudarPagina()}/>
-
+        <Button
+          title="Enviar última notificação lida"
+          onPress={async () => lerNotificacao()}
+        />
+        <Button
+          title="Notificar e ir para outra página"
+          onPress={async () => mudarPagina()}
+        />
       </View>
       <Footer onPress={() => navigation.back()} />
     </View>

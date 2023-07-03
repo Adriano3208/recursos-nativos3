@@ -1,12 +1,13 @@
 import { Button, FlatList, StyleSheet, Text, TextInput, View } from "react-native";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { useEffect, useState } from "react";
-import { ProgressBar } from "react-native-paper";
+import { useState } from "react";
 import { useCallback } from "react";
 import Items from "../components/Items";
 import * as Contacts from "expo-contacts";
+import * as Notifications from "expo-notifications";
 import { useFocusEffect } from "@react-navigation/native";
+
 
 const styles = StyleSheet.create({
   container: {
@@ -37,11 +38,11 @@ export default function ContactsInfo({ navigation }) {
   };
 
   async function notiMensagem() {
-    const token = await Notification.scheduleNotificationAsync({
+    const token = await Notifications.scheduleNotificationAsync({
       content: {
-        title: "Nome do contato",
+        title: "Contato",
         subtitle: "Numero do contato",
-        body: "...",
+        body: "..."
       },
       trigger: { seconds: 3 },
     });
@@ -75,7 +76,7 @@ return (
           data={filteredContacts}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => 
-          <Items item={item} notiMensagem={notiMensagem}/>}//ele fala que a função nao existe sendo que era apenas ele puxar a função de outro arquivo
+          <Items item={item} notiMensagem={notiMensagem}/>}
         />
       ) : (
         <Text>Nenhum contato listado ... </Text>

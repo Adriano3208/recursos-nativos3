@@ -1,84 +1,86 @@
-import { Button, StyleSheet, Text, View } from "react-native";
-import * as Device from 'expo-device'
+import React, { useState, useEffect } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import * as ScreenOrientation from 'expo-screen-orientation';
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-
 
 const styles = StyleSheet.create({
-    header: {
-        paddingTop: 30,
-        backgroundColor: "#606",
-        paddingBottom: 5,
-        paddingHorizontal: 5,
-    },
-    headerTextStyle: {
-        marginTop: 10,
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 35,
-        textAlign: 'center'
-    },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    marginTop: 10,
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 35,
+    textAlign: 'center',
+  },
 });
 
-async function padrao(){
-    await ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.PORTRAIT
-    )
-}
-
-async function direita(){
-    await ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT
-    )
-}
-
-async function esquerda(){
-    await ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.LANDSCAPE_LEFT
-    )
-}
-
-async function normal(){
-    await ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.PORTRAIT_UP
-    )
-}
-
-async function inverter(){
-    await ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.PORTRAIT_DOWN
-    )
-}
-
-async function info(){
-    await ScreenOrientation.getOrientationAsync();
-    await ScreenOrientation.getOrientationLockAsync();
-
-    
-}
-console.log(ScreenOrientation.getOrientationAsync());
-
 export default function MyScreenOrientation() {
-    return(
-        
-        
-        <View style={styles}>
-          <Header
-            title={"Orientação da tela"}
-            />
-            <View>
-                <Button title="padrao" onPress={padrao}/>
-                
-                <Button title="direita" onPress={direita}/>
-                <Button title="esquerda" onPress={esquerda}/>
-                <Button title="normal" onPress={normal}/>
-                <Button title="inverter" onPress={inverter}/>
-                <Button title="info" onPress={info}/>
-           
-            </View>
-            <Footer onPress={() => navigation.back()}/>
-            
-        </View>
-    )
+  const [orientation, setOrientation] = useState(null);
+  const [backgroundColor, setBackgroundColor] = useState('red');
+
+  useEffect(() => {
+    const getOrientation = async () => {
+      const currentOrientation = await ScreenOrientation.getOrientationAsync();
+      setOrientation(currentOrientation);
+    };
+
+    getOrientation();
+  }, []);
+
+  useEffect(() => {
+    if (orientation === 'PORTRAIT' || orientation === 'PORTRAIT_UP' || orientation === 'PORTRAIT_DOWN') {
+      setBackgroundColor('red');
+    } else {
+      setBackgroundColor('green');
+    }
+  }, [orientation]);
+
+  async function padrao() {
+    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+    setBackgroundColor('red');
+  }
+
+  async function direita() {
+    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT);
+    setBackgroundColor('green');
+  }
+
+  async function esquerda() {
+    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_LEFT);
+    setBackgroundColor('green');
+  }
+
+  async function normal() {
+    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+    setBackgroundColor('red');
+  }
+
+  async function inverter() {
+    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_DOWN);
+    setBackgroundColor('red');
+  }
+
+  async function info() {
+    const currentOrientation = await ScreenOrientation.getOrientationAsync();
+    const currentLock = await ScreenOrientation.getOrientationLockAsync();
+    console.log('Current Orientation:', currentOrientation);
+    console.log('Current Lock:', currentLock);
+  }
+
+  return (
+    <View style={[styles.container, { backgroundColor }]}>
+      <Text style={styles.title}>Orientação da tela: {orientation}</Text>
+      <View>
+        <Button title="Padrão" onPress={padrao} />
+        <Button title="Direita" onPress={direita} />
+        <Button title="Esquerda" onPress={esquerda} />
+        <Button title="Normal" onPress={normal} />
+        <Button title="Inverter" onPress={inverter} />
+        <Button title="Informações" onPress={info} />
+      </View>
+    </View>
+  );
 }

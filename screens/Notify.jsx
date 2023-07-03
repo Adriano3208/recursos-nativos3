@@ -114,7 +114,7 @@ export default function Notify({ navigation }) {
               content: {
                 title: "Seu Aparelho",
                 subtitle: "subtitulo",
-                body: "seu aparelho é: " + Device.modelName,
+                body: "seu aparelho " + Device.modelName + " é excelente",
               },
               trigger: { seconds: 3 },
             });

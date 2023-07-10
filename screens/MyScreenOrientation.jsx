@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import * as ScreenOrientation from 'expo-screen-orientation';
+import Header from '../components/Header';
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   title: {
     marginTop: 10,
@@ -72,7 +72,7 @@ export default function MyScreenOrientation() {
 
   return (
     <View style={[styles.container, { backgroundColor }]}>
-      <Text style={styles.title}>Orientação da tela: {orientation}</Text>
+        <Header title="Orientação da Tela" style={styles.titulo}/>
       <View>
         <Button title="Padrão" onPress={padrao} />
         <Button title="Direita" onPress={direita} />

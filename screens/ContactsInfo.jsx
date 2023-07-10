@@ -37,11 +37,11 @@ export default function ContactsInfo({ navigation }) {
     setFilteredContacts(filtered);
   };
 
-  async function notiMensagem() {
+  async function notiMensagem(Emails, PhoneNumbers) {
     const token = await Notifications.scheduleNotificationAsync({
       content: {
-        title: "Contato",
-        subtitle: "Numero do contato",
+        title: "Contato" + Contacts.Fields.Emails,
+        subtitle: "Numero do contato" + Contacts.Fields.xPhoneNumbers,
         body: "..."
       },
       trigger: { seconds: 3 },

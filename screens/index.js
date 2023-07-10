@@ -7,6 +7,8 @@ import Home from "./Home";
 import MyScreenOrientation from "./MyScreenOrientation";
 import Notify from "./Notify";
 import ContactsInfo from "./ContactsInfo";
+import AgendaScreen from "./AgendaScreen";
+import TelaNovaWow from "./TelaNovaWow";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +22,8 @@ export default function RootNavigation({navigation}) {
         <Stack.Screen name="MyScreenOrientation" component={MyScreenOrientation} />
         <Stack.Screen name="Notify" component={Notify} />
         <Stack.Screen name="ContactsInfo" component={ContactsInfo} />
+        <Stack.Screen name="AgendaScreen" component={AgendaScreen} />
+        <Stack.Screen name="TelaNovaWow" component={TelaNovaWow} />
       </Stack.Navigator>
     </NavigationContainer>
   );

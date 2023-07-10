@@ -1,6 +1,6 @@
 import { Button, StyleSheet, Text, View } from "react-native";
 import * as Device from 'expo-device'
-
+import Header from "../components/Header";
 
 
 const styles = StyleSheet.create({
@@ -26,7 +26,7 @@ export default function DeviceInfo() {
         
         
         <View style={styles}>
-            
+            <Header title={"Device"} style={styles.titulo} />
             <Text>
                 O nome do seu dispositivo é:
                 {Device.deviceName}

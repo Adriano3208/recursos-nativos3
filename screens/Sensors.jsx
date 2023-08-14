@@ -27,7 +27,6 @@ export default function Sensors({ navigation }) {
   const [backgroundColor, setBackgroundColor] = useState("white"); // Estado para a cor de fundo
 
   useEffect(() => {
-    deviceMotionSubscription = DeviceMotion.addListener(deviceMotionListener);
     Accelerometer.addListener(acceleroListener);
     Gyroscope.addListener(giroscopioListener);
     Magnetometer.addListener(magnetoListener);
@@ -55,9 +54,7 @@ export default function Sensors({ navigation }) {
   
   };
 
-  const deviceMotionListener = (data) => {
-    setDevice(data);
-  };
+
 
   const giroscopioListener = (data) => {
     setGiroscopio(data);

@@ -29,6 +29,18 @@ const messages = [
     title: "=D",
     body: "=]",
     },
+    {
+    title: "☆*: .｡. o(≧▽≦)o .｡.:*☆",
+    body: "(┬┬﹏┬┬)",
+    },
+    {
+    title: "ヽ(・∀・)ﾉ",
+    body: "(*/ω＼*)",
+    },
+    {
+        title: "🏳️‍🌈🤨",
+        body: "🏳️‍⚧️",
+        },
 ];
 
 export default function TelaNovaWow({ navigation }) {

@@ -9,6 +9,7 @@ import Notify from "./Notify";
 import ContactsInfo from "./ContactsInfo";
 import AgendaScreen from "./AgendaScreen";
 import TelaNovaWow from "./TelaNovaWow";
+import Sensors from "./Sensors";
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,7 @@ export default function RootNavigation({navigation}) {
         <Stack.Screen name="ContactsInfo" component={ContactsInfo} />
         <Stack.Screen name="AgendaScreen" component={AgendaScreen} />
         <Stack.Screen name="TelaNovaWow" component={TelaNovaWow} />
+        <Stack.Screen name="Sensors" component={Sensors} />
       </Stack.Navigator>
     </NavigationContainer>
   );

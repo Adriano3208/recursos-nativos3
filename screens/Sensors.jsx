@@ -19,21 +19,21 @@ const styles = StyleSheet.create({
 });
 
 export default function Sensors({ navigation }) {
-  const [barometer, setBarometer] = useState(); // Estado para o barômetro
+  const [barometer, setBarometer] = useState();
   const [giroscopio, setGiroscopio] = useState();
-  const [accelero, setAccelero] = useState(); // Estado para o acelerômetro
+  const [accelero, setAccelero] = useState();
   const [magneto, setMagneto] = useState();
   const [orientation, setOrientation] = useState("");
-  const [backgroundColor, setBackgroundColor] = useState("white"); // Estado para a cor de fundo
+  const [backgroundColor, setBackgroundColor] = useState("white");
 
   useEffect(() => {
-    Barometer.addListener(barometerListener); // Corrected import and listener
+    Barometer.addListener(barometerListener);
     Accelerometer.addListener(acceleroListener);
     Gyroscope.addListener(giroscopioListener);
     Magnetometer.addListener(magnetoListener);
 
     return () => {
-      Barometer.removeAllListeners(); // Clean up Barometer listener
+      Barometer.removeAllListeners();
       Gyroscope.removeAllListeners();
       Magnetometer.removeAllListeners();
     };
@@ -61,7 +61,6 @@ export default function Sensors({ navigation }) {
   const giroscopioListener = (data) => {
     setGiroscopio(data);
 
-    // Determinar a orientação com base nos valores do giroscópio
     const { x, y, z } = data;
     if (Math.abs(x) < 0.5 && Math.abs(y) < 0.5) {
       setOrientation("Vertical");
@@ -108,4 +107,3 @@ export default function Sensors({ navigation }) {
     </ScrollView>
   );
 }
-

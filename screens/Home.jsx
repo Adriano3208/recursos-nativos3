@@ -28,6 +28,7 @@ export default function Home({navigation}) {
             <Button title="Ir para a agenda" onPress={() => navigation.navigate('AgendaScreen')}>Agenda</Button>
             <Button title="Ir para a tela nova wow" onPress={() => navigation.navigate('TelaNovaWow')}>Tela Criativa</Button>
             <Button title="Ir para a tela de sensores" onPress={() => navigation.navigate('Sensors')}>Sensores</Button>
+            <Button title="Ir para a tela de captura de tela" onPress={() => navigation.navigate('CaptureScreen')}>Capture Screen</Button>
         </View>
     )
 }

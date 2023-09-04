@@ -10,6 +10,7 @@ import ContactsInfo from "./ContactsInfo";
 import AgendaScreen from "./AgendaScreen";
 import TelaNovaWow from "./TelaNovaWow";
 import Sensors from "./Sensors";
+import CaptureScreen from "./CaptureScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ export default function RootNavigation({navigation}) {
         <Stack.Screen name="AgendaScreen" component={AgendaScreen} />
         <Stack.Screen name="TelaNovaWow" component={TelaNovaWow} />
         <Stack.Screen name="Sensors" component={Sensors} />
+        <Stack.Screen name="CaptureScreen" component={CaptureScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
